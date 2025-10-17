@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Empleados - Tienda de Videojuegos</title>
+  <link rel="stylesheet" href="../estilos/styles.css">
+</head>
+<body>
+  <header>
+    <h1>🎮 Tienda de Videojuegos</h1>
+    <nav>
+      <a href="../index.html">Catálogo</a>
+      <a href="./html/iniciarSecion.html">Usuarios</a>
+      <a href="./html/registro.html">Registrarse</a>
+    </nav>
+  </header>
+
+  <main>
+    <section id="empleadosSection">
+      <h2>Panel de Empleados</h2>
+
+      <form id="formProducto">
+        <h3>Agregar / Editar Producto</h3>
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required>
+
+        <label>Tipo:</label>
+        <select name="tipo" required>
+          <option value="juego">Juego</option>
+          <option value="consola">Consola</option>
+          <option value="accesorio">Accesorio</option>
+        </select>
+
+        <label>Precio:</label>
+        <input type="number" name="precio" min="0" required>
+
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" min="0" required>
+
+        <button type="submit">Guardar Producto</button>
+      </form>
+
+      <table id="tablaProductos">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 todos los derechos reservados</p>
+  </footer>
+
+  <script src="./scripts/empleados.js"></script>
+</body>
+</html>

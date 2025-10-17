@@ -1,22 +1,24 @@
 /* ==========================================================
-   🎮 CONTROL DE INVENTARIO DE VIDEOJUEGOS
-   Estilos mejorados: centrado total, moderno y responsivo
+   🎮 SISTEMA DE INVENTARIO - TIENDA DE VIDEOJUEGOS
+   Estilos unificados, modernos y responsivos
    ========================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 /* ---------- VARIABLES GLOBALES ---------- */
 :root {
-  --color-fondo: #f5f7fa;
-  --color-principal: #0066ff;
-  --color-principal-oscuro: #0049b8;
+  --color-primario: #0066ff;
+  --color-oscuro: #0049b8;
   --color-secundario: #17a2b8;
   --color-exito: #2ecc71;
   --color-error: #e74c3c;
-  --color-texto: #2c3e50;
-  --color-blanco: #fff;
+  --fondo: #f5f7fa;
+  --texto: #2c3e50;
+  --blanco: #ffffff;
   --sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
   --radio: 12px;
-  --transicion: all 0.3s ease;
   --fuente: "Poppins", sans-serif;
+  --transicion: all 0.3s ease;
 }
 
 /* ---------- RESET ---------- */
@@ -28,8 +30,8 @@
 
 body {
   font-family: var(--fuente);
-  background-color: var(--color-fondo);
-  color: var(--color-texto);
+  background-color: var(--fondo);
+  color: var(--texto);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -37,16 +39,14 @@ body {
 }
 
 /* ==========================================================
-   🧭 ENCABEZADO
+   🧭 HEADER Y NAVEGACIÓN
    ========================================================== */
 header {
   width: 100%;
-  background: linear-gradient(90deg, var(--color-principal), var(--color-principal-oscuro));
-  color: var(--color-blanco);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 1rem 0;
+  background: linear-gradient(90deg, var(--color-primario), var(--color-oscuro));
+  color: var(--blanco);
+  text-align: center;
+  padding: 1rem;
   box-shadow: var(--sombra);
 }
 
@@ -57,29 +57,28 @@ header h1 {
 
 nav {
   display: flex;
-  gap: 1rem;
-  flex-wrap: wrap;
   justify-content: center;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
-nav button {
-  background: var(--color-blanco);
-  color: var(--color-principal-oscuro);
-  border: none;
+nav a {
+  text-decoration: none;
+  color: var(--color-oscuro);
+  background: var(--blanco);
   padding: 0.6rem 1.2rem;
   border-radius: var(--radio);
-  cursor: pointer;
   font-weight: 600;
   transition: var(--transicion);
 }
 
-nav button:hover {
-  background: var(--color-principal-oscuro);
-  color: var(--color-blanco);
+nav a:hover {
+  background: var(--color-oscuro);
+  color: var(--blanco);
 }
 
 /* ==========================================================
-   📦 CONTENEDOR PRINCIPAL
+   📦 CONTENIDO GENERAL
    ========================================================== */
 main {
   width: 100%;
@@ -88,23 +87,10 @@ main {
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-section {
-  display: none;
-  width: 100%;
   text-align: center;
-  animation: fadeIn 0.4s ease-in-out;
 }
 
-section.active {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
-/* Animación */
+/* Animaciones suaves */
 @keyframes fadeIn {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
@@ -130,12 +116,12 @@ section.active {
   box-shadow: var(--sombra);
 }
 
-.alert.success { background: var(--color-exito); color: var(--color-blanco); }
-.alert.error { background: var(--color-error); color: var(--color-blanco); }
-.alert.info { background: var(--color-secundario); color: var(--color-blanco); }
+.alert.success { background: var(--color-exito); color: var(--blanco); }
+.alert.error { background: var(--color-error); color: var(--blanco); }
+.alert.info { background: var(--color-secundario); color: var(--blanco); }
 
 /* ==========================================================
-   🎮 CATÁLOGO
+   🎮 CATÁLOGO DE PRODUCTOS (index.html)
    ========================================================== */
 .grid {
   display: grid;
@@ -147,27 +133,26 @@ section.active {
 }
 
 .producto-card {
-  background: var(--color-blanco);
+  background: var(--blanco);
   padding: 1.5rem;
   border-radius: var(--radio);
   box-shadow: var(--sombra);
   width: 100%;
   max-width: 300px;
   transition: var(--transicion);
+  animation: fadeIn 0.5s ease;
 }
 
-.producto-card:hover {
-  transform: scale(1.03);
-}
+.producto-card:hover { transform: scale(1.03); }
 
 .producto-card h3 {
-  color: var(--color-principal-oscuro);
+  color: var(--color-oscuro);
   margin-bottom: 0.5rem;
 }
 
 .btn-comprar {
-  background: var(--color-principal);
-  color: var(--color-blanco);
+  background: var(--color-primario);
+  color: var(--blanco);
   border: none;
   padding: 0.6rem 1.2rem;
   border-radius: var(--radio);
@@ -177,73 +162,103 @@ section.active {
   margin-top: 1rem;
 }
 
-.btn-comprar:hover {
-  background: var(--color-principal-oscuro);
-}
+.btn-comprar:hover { background: var(--color-oscuro); }
 
 /* ==========================================================
-   🧾 FORMULARIOS
+   👥 LOGIN / REGISTRO (usuarios.html, iniciarSesion.html, registro.html)
    ========================================================== */
-form {
-  background: var(--color-blanco);
+.container, .login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 2rem;
+  animation: fadeIn 0.4s ease;
+}
+
+.split {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.card, .login-container {
+  background: var(--blanco);
   border-radius: var(--radio);
   box-shadow: var(--sombra);
   padding: 2rem;
   width: 100%;
-  max-width: 500px;
+  max-width: 400px;
   text-align: center;
-  margin-top: 1.5rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  transition: var(--transicion);
 }
 
-form label {
-  font-weight: 600;
+.card:hover { transform: translateY(-3px); }
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   margin-top: 1rem;
 }
 
-form input,
-form select {
+form input, form select {
   width: 100%;
   padding: 0.8rem;
-  margin-top: 0.4rem;
   border: 1px solid #ccc;
   border-radius: var(--radio);
   text-align: center;
   transition: border 0.3s;
 }
 
-form input:focus,
-form select:focus {
-  border-color: var(--color-principal);
+form input:focus, form select:focus {
+  border-color: var(--color-primario);
   outline: none;
 }
 
-form button {
-  background: var(--color-principal);
-  color: var(--color-blanco);
+form button, .btn {
+  background: var(--color-primario);
+  color: var(--blanco);
   border: none;
-  padding: 0.8rem 1.5rem;
   border-radius: var(--radio);
-  margin-top: 1.5rem;
+  padding: 0.8rem 1.2rem;
   cursor: pointer;
   font-weight: 600;
   transition: var(--transicion);
 }
 
-form button:hover {
-  background: var(--color-principal-oscuro);
+form button:hover, .btn:hover {
+  background: var(--color-oscuro);
+}
+
+/* Zona usuario activo */
+.usuario-activo {
+  margin-top: 1.5rem;
+  font-weight: 600;
+  color: var(--color-oscuro);
 }
 
 /* ==========================================================
-   📋 TABLAS
+   🧑‍💼 PANEL DE EMPLEADOS (empleados.html)
    ========================================================== */
+#empleadosSection h2 {
+  color: var(--color-oscuro);
+  margin-bottom: 1rem;
+}
+
+form#formProducto {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  max-width: 500px;
+}
+
 table {
   width: 100%;
   max-width: 900px;
   border-collapse: collapse;
-  background: var(--color-blanco);
+  background: var(--blanco);
   box-shadow: var(--sombra);
   border-radius: var(--radio);
   overflow: hidden;
@@ -256,78 +271,26 @@ th, td {
 }
 
 th {
-  background: var(--color-principal);
-  color: var(--color-blanco);
+  background: var(--color-primario);
+  color: var(--blanco);
   font-weight: 600;
 }
 
-tr:nth-child(even) {
-  background: #f9f9f9;
-}
-
-tr:hover {
-  background: #eaf2ff;
-}
-
-.btn {
-  border: none;
-  border-radius: var(--radio);
-  padding: 0.5rem 1rem;
-  cursor: pointer;
-  transition: var(--transicion);
-  color: var(--color-blanco);
-  font-weight: 500;
-}
+tr:nth-child(even) { background: #f9f9f9; }
+tr:hover { background: #eaf2ff; }
 
 .btn-edit { background: #f39c12; }
 .btn-delete { background: var(--color-error); }
-.btn:hover { opacity: 0.85; }
-
-/* ==========================================================
-   👤 LOGIN
-   ========================================================== */
-.login-container {
-  background: var(--color-blanco);
-  border-radius: var(--radio);
-  box-shadow: var(--sombra);
-  padding: 2rem;
-  max-width: 400px;
-  text-align: center;
-  margin-top: 2rem;
-}
-
-.login-container input {
-  width: 100%;
-  padding: 0.8rem;
-  margin: 0.5rem 0;
-  border: 1px solid #ccc;
-  border-radius: var(--radio);
-  text-align: center;
-}
-
-.login-container button {
-  background: var(--color-principal);
-  color: var(--color-blanco);
-  border: none;
-  padding: 0.8rem;
-  border-radius: var(--radio);
-  margin-top: 0.8rem;
-  width: 100%;
-  cursor: pointer;
-  transition: var(--transicion);
-}
-
-.login-container button:hover {
-  background: var(--color-principal-oscuro);
-}
+.btn-edit:hover { background: #e67e22; }
+.btn-delete:hover { background: #c0392b; }
 
 /* ==========================================================
    ⚙️ FOOTER
    ========================================================== */
 footer {
   width: 100%;
-  background: var(--color-principal);
-  color: var(--color-blanco);
+  background: var(--color-primario);
+  color: var(--blanco);
   text-align: center;
   padding: 1rem;
   box-shadow: var(--sombra);
@@ -340,17 +303,13 @@ footer {
    ========================================================== */
 @media (max-width: 768px) {
   header h1 { font-size: 1.4rem; }
-  nav button { padding: 0.5rem 0.9rem; }
+  nav a { padding: 0.5rem 0.9rem; font-size: 0.9rem; }
 
-  .grid {
-    grid-template-columns: 1fr;
-  }
+  .grid { grid-template-columns: 1fr; }
 
-  form, .login-container {
+  form, .card, .login-container {
     width: 95%;
   }
 
-  table {
-    font-size: 0.9rem;
-  }
+  table { font-size: 0.9rem; }
 }

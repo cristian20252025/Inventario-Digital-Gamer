@@ -7,99 +7,19 @@
   <link rel="stylesheet" href="./estilos/styles.css">
 </head>
 <body>
-  <!-- ================================
-       🧭 NAVBAR
-  ================================= -->
   <header>
     <h1>🎮 Tienda de Videojuegos</h1>
     <nav>
-      <button data-section="catalogoSection">Catálogo</button>
-      <button data-section="loginSection">Usuarios</button>
-      <button data-section="empleadosSection">Empleados</button>
+      <a href="./html/iniciarSecion.html">Usuarios</a>
+      <a href="./html/empleados.html">Empleados</a>
     </nav>
   </header>
 
   <main>
-    <!-- ================================
-         🔔 MENSAJES
-    ================================= -->
-    <div id="alertBox"></div>
-
-    <!-- ================================
-         🕹️ CATÁLOGO DE PRODUCTOS
-    ================================= -->
-    <section id="catalogoSection" class="active">
+    <section id="catalogoSection">
       <h2>Catálogo de Productos</h2>
+      <div id="alertBox"></div>
       <div id="catalogo" class="grid"></div>
-    </section>
-
-    <!-- ================================
-         👤 USUARIOS (LOGIN / REGISTRO)
-    ================================= -->
-    <section id="loginSection">
-      <div class="login-container">
-        <h2>Iniciar Sesión</h2>
-        <form id="formLogin">
-          <input type="email" name="email" placeholder="Correo electrónico" required>
-          <input type="password" name="password" placeholder="Contraseña" required>
-          <button type="submit">Ingresar</button>
-        </form>
-
-        <hr>
-
-        <h3>¿No tienes cuenta?</h3>
-        <form id="formRegistro">
-          <input type="text" name="nombre" placeholder="Nombre completo" required>
-          <input type="email" name="email" placeholder="Correo electrónico" required>
-          <input type="password" name="password" placeholder="Contraseña" required>
-          <button type="submit">Registrarse</button>
-        </form>
-      </div>
-
-      <div id="usuarioActivo"></div>
-    </section>
-
-    <!-- ================================
-         🧑‍💼 PANEL DE EMPLEADOS
-    ================================= -->
-    <section id="empleadosSection">
-      <h2>Panel de Empleados</h2>
-
-      <!-- Formulario de producto -->
-      <form id="formProducto">
-        <h3>Agregar / Editar Producto</h3>
-        <label>Nombre:</label>
-        <input type="text" name="nombre" required>
-
-        <label>Tipo:</label>
-        <select name="tipo" required>
-          <option value="juego">Juego</option>
-          <option value="consola">Consola</option>
-          <option value="accesorio">Accesorio</option>
-        </select>
-
-        <label>Precio:</label>
-        <input type="number" name="precio" min="0" required>
-
-        <label>Cantidad:</label>
-        <input type="number" name="cantidad" min="0" required>
-
-        <button type="submit">Guardar Producto</button>
-      </form>
-
-      <!-- Tabla de productos -->
-      <table id="tablaProductos">
-        <thead>
-          <tr>
-            <th>Nombre</th>
-            <th>Tipo</th>
-            <th>Precio</th>
-            <th>Cantidad</th>
-            <th>Acciones</th>
-          </tr>
-        </thead>
-        <tbody></tbody>
-      </table>
     </section>
   </main>
 
@@ -107,11 +27,6 @@
     <p>© 2025 todos los derechos reservados</p>
   </footer>
 
-  <!-- ================================
-       📜 SCRIPTS
-  ================================= -->
   <script src="./scripts/app.js"></script>
-  <script src="./scripts/usuarios.js"></script>
-  <script src="./scripts/empleados.js"></script>
 </body>
 </html>
