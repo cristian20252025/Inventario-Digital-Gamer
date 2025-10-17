@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🎮 Control de Inventario - Tienda de Videojuegos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- ================================
+       🧭 NAVBAR
+  ================================= -->
+  <header>
+    <h1>🎮 Tienda de Videojuegos</h1>
+    <nav>
+      <button data-section="catalogoSection">Catálogo</button>
+      <button data-section="loginSection">Usuarios</button>
+      <button data-section="empleadosSection">Empleados</button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ================================
+         🔔 MENSAJES
+    ================================= -->
+    <div id="alertBox"></div>
+
+    <!-- ================================
+         🕹️ CATÁLOGO DE PRODUCTOS
+    ================================= -->
+    <section id="catalogoSection" class="active">
+      <h2>Catálogo de Productos</h2>
+      <div id="catalogo" class="grid"></div>
+    </section>
+
+    <!-- ================================
+         👤 USUARIOS (LOGIN / REGISTRO)
+    ================================= -->
+    <section id="loginSection">
+      <div class="login-container">
+        <h2>Iniciar Sesión</h2>
+        <form id="formLogin">
+          <input type="email" name="email" placeholder="Correo electrónico" required>
+          <input type="password" name="password" placeholder="Contraseña" required>
+          <button type="submit">Ingresar</button>
+        </form>
+
+        <hr>
+
+        <h3>¿No tienes cuenta?</h3>
+        <form id="formRegistro">
+          <input type="text" name="nombre" placeholder="Nombre completo" required>
+          <input type="email" name="email" placeholder="Correo electrónico" required>
+          <input type="password" name="password" placeholder="Contraseña" required>
+          <button type="submit">Registrarse</button>
+        </form>
+      </div>
+
+      <div id="usuarioActivo"></div>
+    </section>
+
+    <!-- ================================
+         🧑‍💼 PANEL DE EMPLEADOS
+    ================================= -->
+    <section id="empleadosSection">
+      <h2>Panel de Empleados</h2>
+
+      <!-- Formulario de producto -->
+      <form id="formProducto">
+        <h3>Agregar / Editar Producto</h3>
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required>
+
+        <label>Tipo:</label>
+        <select name="tipo" required>
+          <option value="juego">Juego</option>
+          <option value="consola">Consola</option>
+          <option value="accesorio">Accesorio</option>
+        </select>
+
+        <label>Precio:</label>
+        <input type="number" name="precio" min="0" required>
+
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" min="0" required>
+
+        <button type="submit">Guardar Producto</button>
+      </form>
+
+      <!-- Tabla de productos -->
+      <table id="tablaProductos">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 Tienda de Videojuegos | Desarrollado con ❤️ en Node.js + MongoDB</p>
+  </footer>
+
+  <!-- ================================
+       📜 SCRIPTS
+  ================================= -->
+  <script src="app.js"></script>
+  <script src="usuarios.js"></script>
+  <script src="empleados.js"></script>
+</body>
+</html>

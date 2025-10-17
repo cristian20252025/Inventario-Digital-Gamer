@@ -1,0 +1,356 @@
+/* ==========================================================
+   🎮 CONTROL DE INVENTARIO DE VIDEOJUEGOS
+   Estilos mejorados: centrado total, moderno y responsivo
+   ========================================================== */
+
+/* ---------- VARIABLES GLOBALES ---------- */
+:root {
+  --color-fondo: #f5f7fa;
+  --color-principal: #0066ff;
+  --color-principal-oscuro: #0049b8;
+  --color-secundario: #17a2b8;
+  --color-exito: #2ecc71;
+  --color-error: #e74c3c;
+  --color-texto: #2c3e50;
+  --color-blanco: #fff;
+  --sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --radio: 12px;
+  --transicion: all 0.3s ease;
+  --fuente: "Poppins", sans-serif;
+}
+
+/* ---------- RESET ---------- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--fuente);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+}
+
+/* ==========================================================
+   🧭 ENCABEZADO
+   ========================================================== */
+header {
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-principal), var(--color-principal-oscuro));
+  color: var(--color-blanco);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1rem 0;
+  box-shadow: var(--sombra);
+}
+
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
+
+nav {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+nav button {
+  background: var(--color-blanco);
+  color: var(--color-principal-oscuro);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radio);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transicion);
+}
+
+nav button:hover {
+  background: var(--color-principal-oscuro);
+  color: var(--color-blanco);
+}
+
+/* ==========================================================
+   📦 CONTENEDOR PRINCIPAL
+   ========================================================== */
+main {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+section {
+  display: none;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
+
+section.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================
+   📣 ALERTAS
+   ========================================================== */
+#alertBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: var(--radio);
+  font-weight: 500;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: var(--sombra);
+}
+
+.alert.success { background: var(--color-exito); color: var(--color-blanco); }
+.alert.error { background: var(--color-error); color: var(--color-blanco); }
+.alert.info { background: var(--color-secundario); color: var(--color-blanco); }
+
+/* ==========================================================
+   🎮 CATÁLOGO
+   ========================================================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  justify-items: center;
+  margin-top: 1.5rem;
+}
+
+.producto-card {
+  background: var(--color-blanco);
+  padding: 1.5rem;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  width: 100%;
+  max-width: 300px;
+  transition: var(--transicion);
+}
+
+.producto-card:hover {
+  transform: scale(1.03);
+}
+
+.producto-card h3 {
+  color: var(--color-principal-oscuro);
+  margin-bottom: 0.5rem;
+}
+
+.btn-comprar {
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radio);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transicion);
+  margin-top: 1rem;
+}
+
+.btn-comprar:hover {
+  background: var(--color-principal-oscuro);
+}
+
+/* ==========================================================
+   🧾 FORMULARIOS
+   ========================================================== */
+form {
+  background: var(--color-blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+form label {
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+form input,
+form select {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.4rem;
+  border: 1px solid #ccc;
+  border-radius: var(--radio);
+  text-align: center;
+  transition: border 0.3s;
+}
+
+form input:focus,
+form select:focus {
+  border-color: var(--color-principal);
+  outline: none;
+}
+
+form button {
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radio);
+  margin-top: 1.5rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transicion);
+}
+
+form button:hover {
+  background: var(--color-principal-oscuro);
+}
+
+/* ==========================================================
+   📋 TABLAS
+   ========================================================== */
+table {
+  width: 100%;
+  max-width: 900px;
+  border-collapse: collapse;
+  background: var(--color-blanco);
+  box-shadow: var(--sombra);
+  border-radius: var(--radio);
+  overflow: hidden;
+  margin-top: 2rem;
+}
+
+th, td {
+  padding: 1rem;
+  text-align: center;
+}
+
+th {
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  font-weight: 600;
+}
+
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
+
+tr:hover {
+  background: #eaf2ff;
+}
+
+.btn {
+  border: none;
+  border-radius: var(--radio);
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: var(--transicion);
+  color: var(--color-blanco);
+  font-weight: 500;
+}
+
+.btn-edit { background: #f39c12; }
+.btn-delete { background: var(--color-error); }
+.btn:hover { opacity: 0.85; }
+
+/* ==========================================================
+   👤 LOGIN
+   ========================================================== */
+.login-container {
+  background: var(--color-blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  max-width: 400px;
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.login-container input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: var(--radio);
+  text-align: center;
+}
+
+.login-container button {
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  border: none;
+  padding: 0.8rem;
+  border-radius: var(--radio);
+  margin-top: 0.8rem;
+  width: 100%;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
+.login-container button:hover {
+  background: var(--color-principal-oscuro);
+}
+
+/* ==========================================================
+   ⚙️ FOOTER
+   ========================================================== */
+footer {
+  width: 100%;
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  text-align: center;
+  padding: 1rem;
+  box-shadow: var(--sombra);
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================
+   📱 RESPONSIVIDAD
+   ========================================================== */
+@media (max-width: 768px) {
+  header h1 { font-size: 1.4rem; }
+  nav button { padding: 0.5rem 0.9rem; }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  form, .login-container {
+    width: 95%;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
+}
