@@ -1,43 +1,44 @@
-# API de Inventario - Tienda de Videojuegos
+## README Frontend
 
-Este proyecto es el backend de una aplicación web Full Stack para gestionar el inventario y las ventas de una tienda de videojuegos físicos y consolas. Está construido con **Node.js**, **Express** y **MongoDB**, siguiendo buenas prácticas de modularización, validaciones y configuración.
+# Frontend - Tienda de Videojuegos
 
-## Tecnologías utilizadas
+Este es el frontend de la aplicación de inventario y ventas para una tienda de videojuegos. Está desarrollado con **HTML**, **CSS** y **JavaScript puro**, y se conecta con una API REST construida en Node.js.
 
-- Node.js
-- Express
+## Funcionalidades
+
+- Listar catálogo de productos
+- Simular una compra (registrar venta)
+- Mostrar mensajes de error si no hay stock
+- Interfaz amigable para crear, editar y eliminar productos
 
 ## Instalación
 
 1. Clona este repositorio:
    ```bash
-   git clone https://github.com/tu-usuario/backend-inventario.git
-   cd backend-inventario
+   git clone https://github.com/tu-usuario/frontend-inventario.git
+   cd frontend-inventario
 
-2. Instala las dependencias:
-npm install
+2. Abre el archivo index.html en tu navegador o usa una extensión como Live Server en VS Code.
 
-3. Crea un archivo .env en la raíz del proyecto con las siguientes variables:
-PORT=3000
-MONGODB_URI=mongodb://localhost:27017/inventario
+    Asegúrate de que el backend esté corriendo y que el CORS esté correctamente configurado para permitir la conexión.
 
-4. Inicia el servidor:
-bash
-npm run dev
+## Conexión con el backend
+
+El frontend se comunica con el backend a través de fetch() usando la URL base definida en el archivo config.js o directamente en los scripts.
+
+Ejemplo:
+fetch('http://localhost:3000/api/productos')
 
 ## Estructura del proyecto
-backend/
-├── controllers/
-├── models/
-├── routes/
-├── middlewares/
-├── config/
-├── .env
-├── app.js
-└── server.js
 
-## Endpoints principales
+frontend/
+├── index.html
+├── styles.css
+├── empleados.js
+├── usuarios.js
+└── app.js 
 
+<<<<<<< HEAD
 ### Productos
 - GET /api/productos → Listar todos los productos
 
@@ -54,3 +55,7 @@ backend/
 
 ## Repositorio del frontend
 - aaa
+=======
+## Validaciones
+Los mensajes de error del backend (como stock insuficiente o datos inválidos) se muestran en la interfaz para mejorar la experiencia del usuario.
+>>>>>>> 4e8f67f9d08f56806648248c25678ae4632744e5
