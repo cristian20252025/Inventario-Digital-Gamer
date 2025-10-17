@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control de Inventario de Videojuegos</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- ======= ENCABEZADO ======= -->
+  <header>
+    <h1>🎮 Control de Inventario - Videojuegos</h1>
+    <nav>
+      <button data-target="productos">Productos</button>
+      <button data-target="ventas">Ventas</button>
+      <button data-target="usuarios">Usuarios</button>
+      <button data-target="empleados">Empleados</button>
+      <button onclick="logout()">Cerrar Sesión</button>
+    </nav>
+  </header>
+
+  <!-- ======= SECCIÓN LOGIN ======= -->
+  <section id="loginSection">
+    <div class="login-container">
+      <h2>Iniciar Sesión</h2>
+      <form id="loginForm">
+        <label>Email:</label>
+        <input type="email" name="email" required>
+        <label>Contraseña:</label>
+        <input type="password" name="password" required>
+        <button type="submit">Ingresar</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ======= DASHBOARD PRINCIPAL ======= -->
+  <main id="dashboard">
+    
+    <!-- === PRODUCTOS === -->
+    <section id="productos" class="active">
+      <h2>Inventario de Productos</h2>
+      <form id="formProducto">
+        <label>Nombre:</label>
+        <input type="text" name="nombre" required>
+        <label>Tipo:</label>
+        <select name="tipo" required>
+          <option value="juego">Juego</option>
+          <option value="consola">Consola</option>
+        </select>
+        <label>Precio:</label>
+        <input type="number" name="precio" step="0.01" required>
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" required>
+        <button type="submit">Agregar Producto</button>
+      </form>
+
+      <table id="tablaProductos">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Tipo</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- === VENTAS === -->
+    <section id="ventas">
+      <h2>Registro de Ventas</h2>
+      <form id="formVenta">
+        <label>ID Producto:</label>
+        <input type="text" name="productId" placeholder="Ej: 652d1..." required>
+        <label>Cantidad:</label>
+        <input type="number" name="cantidad" required>
+        <label>Cliente:</label>
+        <input type="text" name="cliente" required>
+        <button type="submit">Registrar Venta</button>
+      </form>
+
+      <table id="tablaVentas">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Cliente</th>
+            <th>Total</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- === USUARIOS === -->
+    <section id="usuarios">
+      <h2>Usuarios Registrados</h2>
+      <table id="tablaUsuarios">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Rol</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+
+    <!-- === EMPLEADOS === -->
+    <section id="empleados">
+      <h2>Empleados</h2>
+      <table id="tablaEmpleados">
+        <thead>
+          <tr>
+            <th>Nombre</th>
+            <th>Cargo</th>
+            <th>Salario</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
