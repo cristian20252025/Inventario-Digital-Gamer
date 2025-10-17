@@ -1,16 +1,25 @@
+/* ==========================================================
+   🎮 CONTROL DE INVENTARIO DE VIDEOJUEGOS
+   Estilos mejorados: centrado total, moderno y responsivo
+   ========================================================== */
+
+/* ---------- VARIABLES GLOBALES ---------- */
 :root {
-  --bg: #f4f6f8;
-  --primary: #1e90ff;
-  --dark: #0f5fbf;
-  --accent: #ff4757;
-  --text: #333;
-  --white: #fff;
-  --radius: 10px;
-  --transition: 0.3s ease;
-  --font: "Poppins", sans-serif;
+  --color-fondo: #f5f7fa;
+  --color-principal: #0066ff;
+  --color-principal-oscuro: #0049b8;
+  --color-secundario: #17a2b8;
+  --color-exito: #2ecc71;
+  --color-error: #e74c3c;
+  --color-texto: #2c3e50;
+  --color-blanco: #fff;
+  --sombra: 0 4px 20px rgba(0, 0, 0, 0.1);
+  --radio: 12px;
+  --transicion: all 0.3s ease;
+  --fuente: "Poppins", sans-serif;
 }
 
-/* RESET */
+/* ---------- RESET ---------- */
 * {
   margin: 0;
   padding: 0;
@@ -18,163 +27,330 @@
 }
 
 body {
-  font-family: var(--font);
-  background-color: var(--bg);
-  color: var(--text);
+  font-family: var(--fuente);
+  background-color: var(--color-fondo);
+  color: var(--color-texto);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   min-height: 100vh;
 }
 
-/* HEADER */
+/* ==========================================================
+   🧭 ENCABEZADO
+   ========================================================== */
 header {
-  background: var(--primary);
-  color: var(--white);
-  padding: 1rem 2rem;
+  width: 100%;
+  background: linear-gradient(90deg, var(--color-principal), var(--color-principal-oscuro));
+  color: var(--color-blanco);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
+  padding: 1rem 0;
+  box-shadow: var(--sombra);
 }
 
-header h1 { font-size: 1.3rem; }
+header h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.8rem;
+}
 
 nav {
   display: flex;
   gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
 nav button {
-  background: transparent;
-  border: 2px solid var(--white);
-  color: var(--white);
-  border-radius: var(--radius);
-  padding: 0.4rem 0.8rem;
+  background: var(--color-blanco);
+  color: var(--color-principal-oscuro);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radio);
   cursor: pointer;
-  transition: var(--transition);
+  font-weight: 600;
+  transition: var(--transicion);
 }
 
 nav button:hover {
-  background: var(--white);
-  color: var(--primary);
+  background: var(--color-principal-oscuro);
+  color: var(--color-blanco);
 }
 
-/* MAIN */
+/* ==========================================================
+   📦 CONTENEDOR PRINCIPAL
+   ========================================================== */
 main {
-  max-width: 1000px;
-  margin: 2rem auto;
-  padding: 1rem;
+  width: 100%;
+  max-width: 1200px;
+  padding: 2rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
-section { display: none; }
-section.active { display: block; }
+section {
+  display: none;
+  width: 100%;
+  text-align: center;
+  animation: fadeIn 0.4s ease-in-out;
+}
 
-h2 {
+section.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animación */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ==========================================================
+   📣 ALERTAS
+   ========================================================== */
+#alertBox {
+  width: 100%;
+  display: flex;
+  justify-content: center;
   margin-bottom: 1rem;
-  color: var(--dark);
 }
 
-/* FORMULARIOS */
+.alert {
+  padding: 1rem 1.5rem;
+  border-radius: var(--radio);
+  font-weight: 500;
+  width: 90%;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: var(--sombra);
+}
+
+.alert.success { background: var(--color-exito); color: var(--color-blanco); }
+.alert.error { background: var(--color-error); color: var(--color-blanco); }
+.alert.info { background: var(--color-secundario); color: var(--color-blanco); }
+
+/* ==========================================================
+   🎮 CATÁLOGO
+   ========================================================== */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+  justify-items: center;
+  margin-top: 1.5rem;
+}
+
+.producto-card {
+  background: var(--color-blanco);
+  padding: 1.5rem;
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  width: 100%;
+  max-width: 300px;
+  transition: var(--transicion);
+}
+
+.producto-card:hover {
+  transform: scale(1.03);
+}
+
+.producto-card h3 {
+  color: var(--color-principal-oscuro);
+  margin-bottom: 0.5rem;
+}
+
+.btn-comprar {
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: var(--radio);
+  cursor: pointer;
+  font-weight: 600;
+  transition: var(--transicion);
+  margin-top: 1rem;
+}
+
+.btn-comprar:hover {
+  background: var(--color-principal-oscuro);
+}
+
+/* ==========================================================
+   🧾 FORMULARIOS
+   ========================================================== */
 form {
-  background: var(--white);
-  padding: 1rem;
-  border-radius: var(--radius);
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-  margin-bottom: 1.5rem;
+  background: var(--color-blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 form label {
-  display: block;
-  margin-top: 0.5rem;
+  font-weight: 600;
+  margin-top: 1rem;
 }
 
-form input, form select {
+form input,
+form select {
   width: 100%;
-  padding: 0.4rem;
-  margin-top: 0.2rem;
+  padding: 0.8rem;
+  margin-top: 0.4rem;
   border: 1px solid #ccc;
-  border-radius: var(--radius);
+  border-radius: var(--radio);
+  text-align: center;
+  transition: border 0.3s;
+}
+
+form input:focus,
+form select:focus {
+  border-color: var(--color-principal);
+  outline: none;
 }
 
 form button {
-  margin-top: 1rem;
-  background: var(--primary);
-  color: var(--white);
+  background: var(--color-principal);
+  color: var(--color-blanco);
   border: none;
-  border-radius: var(--radius);
-  padding: 0.5rem 1rem;
+  padding: 0.8rem 1.5rem;
+  border-radius: var(--radio);
+  margin-top: 1.5rem;
   cursor: pointer;
-  transition: var(--transition);
+  font-weight: 600;
+  transition: var(--transicion);
 }
 
-form button:hover { background: var(--dark); }
+form button:hover {
+  background: var(--color-principal-oscuro);
+}
 
-/* TABLAS */
+/* ==========================================================
+   📋 TABLAS
+   ========================================================== */
 table {
   width: 100%;
+  max-width: 900px;
   border-collapse: collapse;
-  background: var(--white);
-  border-radius: var(--radius);
+  background: var(--color-blanco);
+  box-shadow: var(--sombra);
+  border-radius: var(--radio);
   overflow: hidden;
+  margin-top: 2rem;
 }
 
 th, td {
-  padding: 0.7rem 1rem;
-  text-align: left;
+  padding: 1rem;
+  text-align: center;
 }
 
 th {
-  background: var(--primary);
-  color: var(--white);
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  font-weight: 600;
 }
 
-tr:nth-child(even) { background: #f9f9f9; }
+tr:nth-child(even) {
+  background: #f9f9f9;
+}
 
-/* BOTONES */
+tr:hover {
+  background: #eaf2ff;
+}
+
 .btn {
   border: none;
-  padding: 0.3rem 0.6rem;
-  border-radius: var(--radius);
+  border-radius: var(--radio);
+  padding: 0.5rem 1rem;
   cursor: pointer;
-  color: var(--white);
-  transition: var(--transition);
+  transition: var(--transicion);
+  color: var(--color-blanco);
+  font-weight: 500;
 }
 
-.btn-edit { background: #ffa502; }
-.btn-delete { background: var(--accent); }
+.btn-edit { background: #f39c12; }
+.btn-delete { background: var(--color-error); }
+.btn:hover { opacity: 0.85; }
 
-.btn:hover { opacity: 0.8; }
-
-/* ALERTAS */
-.alert {
-  position: fixed;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 0.8rem 1.2rem;
-  border-radius: var(--radius);
-  color: var(--white);
-  z-index: 1000;
-}
-
-.alert.success { background: #2ed573; }
-.alert.error { background: var(--accent); }
-.alert.info { background: var(--primary); }
-
-/* LOGIN */
+/* ==========================================================
+   👤 LOGIN
+   ========================================================== */
 .login-container {
-  background: var(--white);
-  max-width: 350px;
-  margin: 4rem auto;
+  background: var(--color-blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
   padding: 2rem;
-  border-radius: var(--radius);
-  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  max-width: 400px;
+  text-align: center;
+  margin-top: 2rem;
 }
 
-.login-container h2 {
-  margin-bottom: 1rem;
-  color: var(--primary);
+.login-container input {
+  width: 100%;
+  padding: 0.8rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ccc;
+  border-radius: var(--radio);
+  text-align: center;
 }
 
-/* RESPONSIVE */
+.login-container button {
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  border: none;
+  padding: 0.8rem;
+  border-radius: var(--radio);
+  margin-top: 0.8rem;
+  width: 100%;
+  cursor: pointer;
+  transition: var(--transicion);
+}
+
+.login-container button:hover {
+  background: var(--color-principal-oscuro);
+}
+
+/* ==========================================================
+   ⚙️ FOOTER
+   ========================================================== */
+footer {
+  width: 100%;
+  background: var(--color-principal);
+  color: var(--color-blanco);
+  text-align: center;
+  padding: 1rem;
+  box-shadow: var(--sombra);
+  margin-top: auto;
+  font-size: 0.9rem;
+}
+
+/* ==========================================================
+   📱 RESPONSIVIDAD
+   ========================================================== */
 @media (max-width: 768px) {
-  nav { flex-wrap: wrap; justify-content: center; }
-  form, table { font-size: 0.9rem; }
+  header h1 { font-size: 1.4rem; }
+  nav button { padding: 0.5rem 0.9rem; }
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  form, .login-container {
+    width: 95%;
+  }
+
+  table {
+    font-size: 0.9rem;
+  }
 }
