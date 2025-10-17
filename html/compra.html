@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tienda - Videojuegos</title>
+  <link rel="stylesheet" href="../estilos/styles.css" />
+  <link rel="stylesheet" href="../estilos/compra.css" />
+</head>
+<body>
+  <header>
+    <h1>🎮 Tienda de Videojuegos</h1>
+    <nav>
+      <a href="#" id="btnVerCarrito">🛒 Carrito (<span id="cantidadCarrito">0</span>)</a>
+      <a href="#" id="btnCerrarSesion">🚪 Cerrar Sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección de bienvenida del usuario -->
+    <section id="bienvenidaSection">
+      <h2>Bienvenido, <span id="nombreUsuario">Usuario</span></h2>
+      <p>Explora nuestro catálogo de videojuegos</p>
+    </section>
+
+    <!-- Alerta global -->
+    <div id="alertBox"></div>
+
+    <!-- Sección del catálogo de productos -->
+    <section id="catalogoSection">
+      <h2>Catálogo de Productos</h2>
+      <div id="catalogo" class="grid"></div>
+    </section>
+
+    <!-- Modal del carrito de compras -->
+    <section id="carritoModal">
+      <div class="carrito-contenido">
+        <div class="carrito-header">
+          <h2>🛒 Mi Carrito de Compras</h2>
+          <button id="btnCerrarCarrito">✖ Cerrar</button>
+        </div>
+        
+        <div id="listaCarrito"></div>
+        
+        <div class="carrito-total">
+          <div class="carrito-total-row">
+            <h3>Total:</h3>
+            <h3 id="totalCarrito">$0</h3>
+          </div>
+          <button id="btnFinalizarCompra" class="btn">💳 Finalizar Compra</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 todos los derechos reservados</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="../scripts/compra.js"></script>
+</body>
+</html>

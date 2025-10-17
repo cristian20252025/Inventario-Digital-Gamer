@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Panel de Empleados - Tienda de Videojuegos</title>
+  <link rel="stylesheet" href="../estilos/styles.css">
+  <link rel="stylesheet" href="../estilos/productos.css">
+</head>
+<body>
+  <header>
+    <h1>🎮 Panel de Administración</h1>
+    <nav>
+      <a href="#" id="btnCerrarSesion">🚪 Cerrar Sesión</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Sección de bienvenida -->
+    <section id="bienvenidaSection">
+      <h2>Bienvenido, <span id="nombreEmpleado">Empleado</span></h2>
+      <p>Gestiona el inventario de productos</p>
+    </section>
+
+    <!-- Alerta global -->
+    <div id="alertBox"></div>
+
+    <!-- Panel de empleados -->
+    <section id="empleadosSection">
+      <!-- Buscador de productos -->
+      <div class="busqueda-container">
+        <input 
+          type="text" 
+          id="buscarProducto" 
+          placeholder="🔍 Buscar productos por nombre, plataforma o género..."
+          class="input-busqueda"
+        >
+      </div>
+
+      <!-- Formulario de producto -->
+      <div class="formulario-container">
+        <form id="formProducto">
+          <h3 id="formTitulo">➕ Agregar Nuevo Producto</h3>
+          <input type="hidden" id="productoId" name="id">
+          
+          <div class="form-row">
+            <div class="form-column">
+              <label for="nombre">Nombre del Producto:</label>
+              <input type="text" id="nombre" name="nombre" placeholder="Ej: The Last of Us Part II" required>
+
+              <label for="plataforma">Plataforma:</label>
+              <input type="text" id="plataforma" name="plataforma" placeholder="Ej: PlayStation 5, Xbox Series X, PC" required>
+
+              <label for="genero">Género:</label>
+              <select id="genero" name="genero" required>
+                <option value="">Selecciona un género</option>
+                <option value="Acción">Acción</option>
+                <option value="Aventura">Aventura</option>
+                <option value="RPG">RPG</option>
+                <option value="Deportes">Deportes</option>
+                <option value="Estrategia">Estrategia</option>
+                <option value="Simulación">Simulación</option>
+                <option value="Terror">Terror</option>
+                <option value="Puzzle">Puzzle</option>
+                <option value="Carreras">Carreras</option>
+                <option value="Shooter">Shooter</option>
+                <option value="Multijugador">Multijugador</option>
+              </select>
+            </div>
+
+            <div class="form-column">
+              <label for="precio">Precio ($):</label>
+              <input type="number" id="precio" name="precio" min="0" step="0.01" placeholder="Ej: 59.99" required>
+
+              <label for="stock">Stock:</label>
+              <input type="number" id="stock" name="stock" min="0" placeholder="Ej: 50" required>
+
+              <label for="descripcion">Descripción (Opcional):</label>
+              <textarea id="descripcion" name="descripcion" rows="3" placeholder="Breve descripción del producto..."></textarea>
+            </div>
+          </div>
+
+          <div class="form-actions">
+            <button type="submit" class="btn-submit" id="btnGuardar">💾 Guardar Producto</button>
+            <button type="button" class="btn-cancel" id="btnCancelar">❌ Cancelar</button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Tabla de productos -->
+      <div class="tabla-container">
+        <h3>📦 Inventario de Productos</h3>
+        <div class="tabla-scroll">
+          <table id="tablaProductos">
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Plataforma</th>
+                <th>Género</th>
+                <th>Precio</th>
+                <th>Stock</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2025 todos los derechos reservados</p>
+  </footer>
+
+  <script src="../scripts/productos.js"></script>
+</body>
+</html>

@@ -1,0 +1,374 @@
+/* ==========================================================
+   👨‍💼 ESTILOS PARA PRODUCTOS.HTML - PANEL DE EMPLEADOS
+   ========================================================== */
+
+/* ---------- SECCIÓN DE BIENVENIDA ---------- */
+#bienvenidaSection {
+  text-align: center;
+  padding: 2rem 1rem;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8ecef 100%);
+  border-radius: var(--radio);
+  margin-bottom: 2rem;
+  box-shadow: var(--sombra);
+  animation: fadeIn 0.6s ease;
+}
+
+#bienvenidaSection h2 {
+  color: var(--color-oscuro);
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+#bienvenidaSection p {
+  color: #6c757d;
+  font-size: 1.1rem;
+}
+
+#nombreEmpleado {
+  color: var(--color-primario);
+  font-weight: 700;
+}
+
+/* ---------- SECCIÓN DE EMPLEADOS ---------- */
+#empleadosSection {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+
+/* ---------- BUSCADOR ---------- */
+.busqueda-container {
+  margin-bottom: 2rem;
+  animation: fadeIn 0.5s ease;
+}
+
+.input-busqueda {
+  width: 100%;
+  padding: 1rem 1.5rem;
+  border: 2px solid #dfe6e9;
+  border-radius: var(--radio);
+  font-size: 1.1rem;
+  font-family: var(--fuente);
+  background: #ffffff;
+  color: var(--texto);
+  transition: var(--transicion);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.input-busqueda:focus {
+  border-color: var(--color-primario);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+}
+
+.input-busqueda::placeholder {
+  color: #95a5a6;
+}
+
+/* ---------- FORMULARIO DE PRODUCTO ---------- */
+.formulario-container {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  animation: fadeIn 0.6s ease;
+}
+
+#formProducto h3 {
+  color: var(--color-oscuro);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.form-column label {
+  color: var(--texto);
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin-bottom: -0.5rem;
+}
+
+.form-column input,
+.form-column select,
+.form-column textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 2px solid #dfe6e9;
+  border-radius: var(--radio);
+  font-size: 1rem;
+  font-family: var(--fuente);
+  background: #f8f9fa;
+  color: var(--texto);
+  transition: var(--transicion);
+}
+
+.form-column input:focus,
+.form-column select:focus,
+.form-column textarea:focus {
+  border-color: var(--color-primario);
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
+  background: #ffffff;
+}
+
+.form-column textarea {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* ---------- BOTONES DEL FORMULARIO ---------- */
+.form-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.btn-submit,
+.btn-cancel {
+  flex: 1;
+  padding: 1rem;
+  border: none;
+  border-radius: var(--radio);
+  font-size: 1.1rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: var(--transicion);
+  font-family: var(--fuente);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.btn-submit {
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-oscuro) 100%);
+  color: var(--blanco);
+  box-shadow: 0 4px 15px rgba(0, 102, 255, 0.3);
+}
+
+.btn-submit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 102, 255, 0.4);
+}
+
+.btn-cancel {
+  background: #95a5a6;
+  color: var(--blanco);
+  display: none;
+}
+
+.btn-cancel:hover {
+  background: #7f8c8d;
+  transform: translateY(-2px);
+}
+
+.btn-cancel.visible {
+  display: block;
+}
+
+/* ---------- TABLA DE PRODUCTOS ---------- */
+.tabla-container {
+  background: var(--blanco);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 2rem;
+  animation: fadeIn 0.7s ease;
+}
+
+.tabla-container h3 {
+  color: var(--color-oscuro);
+  font-size: 1.6rem;
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+.tabla-scroll {
+  overflow-x: auto;
+}
+
+#tablaProductos {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--blanco);
+  border-radius: var(--radio);
+  overflow: hidden;
+}
+
+#tablaProductos thead {
+  background: linear-gradient(135deg, var(--color-primario) 0%, var(--color-oscuro) 100%);
+  color: var(--blanco);
+}
+
+#tablaProductos th {
+  padding: 1.2rem 1rem;
+  text-align: left;
+  font-weight: 700;
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#tablaProductos tbody tr {
+  border-bottom: 1px solid #e0e6ed;
+  transition: background 0.3s ease;
+}
+
+#tablaProductos tbody tr:hover {
+  background: #f8f9fa;
+}
+
+#tablaProductos tbody tr:last-child {
+  border-bottom: none;
+}
+
+#tablaProductos td {
+  padding: 1rem;
+  color: var(--texto);
+  font-size: 0.95rem;
+}
+
+#tablaProductos td:first-child {
+  font-weight: 600;
+  color: var(--color-oscuro);
+}
+
+/* ---------- BOTONES DE ACCIÓN EN TABLA ---------- */
+.acciones-cell {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.btn-edit,
+.btn-delete {
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: var(--transicion);
+  font-family: var(--fuente);
+  color: var(--blanco);
+}
+
+.btn-edit {
+  background: #f39c12;
+}
+
+.btn-edit:hover {
+  background: #e67e22;
+  transform: scale(1.05);
+}
+
+.btn-delete {
+  background: var(--color-error);
+}
+
+.btn-delete:hover {
+  background: #c0392b;
+  transform: scale(1.05);
+}
+
+/* ---------- ESTADO VACÍO ---------- */
+.tabla-vacia {
+  text-align: center;
+  padding: 3rem;
+  color: #7f8c8d;
+  font-size: 1.1rem;
+}
+
+.tabla-vacia::before {
+  content: '📦';
+  display: block;
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+/* ---------- BADGES DE STOCK ---------- */
+.badge-stock {
+  display: inline-block;
+  padding: 0.3rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.badge-stock.bajo {
+  background: #e74c3c;
+  color: var(--blanco);
+}
+
+.badge-stock.medio {
+  background: #f39c12;
+  color: var(--blanco);
+}
+
+.badge-stock.alto {
+  background: var(--color-exito);
+  color: var(--blanco);
+}
+
+/* ---------- RESPONSIVIDAD ---------- */
+@media (max-width: 1024px) {
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  #bienvenidaSection h2 {
+    font-size: 1.5rem;
+  }
+
+  .formulario-container,
+  .tabla-container {
+    padding: 1.5rem 1rem;
+  }
+
+  #formProducto h3,
+  .tabla-container h3 {
+    font-size: 1.3rem;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  #tablaProductos {
+    font-size: 0.85rem;
+  }
+
+  #tablaProductos th,
+  #tablaProductos td {
+    padding: 0.8rem 0.5rem;
+  }
+
+  .acciones-cell {
+    flex-direction: column;
+  }
+
+  .btn-edit,
+  .btn-delete {
+    width: 100%;
+  }
+}

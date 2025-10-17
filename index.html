@@ -1,25 +1,88 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>🎮 Control de Inventario - Tienda de Videojuegos</title>
+  <title>🎮 Tienda de Videojuegos - Inicio</title>
   <link rel="stylesheet" href="./estilos/styles.css">
 </head>
+
 <body>
   <header>
     <h1>🎮 Tienda de Videojuegos</h1>
-    <nav>
-      <a href="./html/iniciarSecion.html">Usuarios</a>
-      <a href="./html/empleados.html">Empleados</a>
-    </nav>
   </header>
 
   <main>
-    <section id="catalogoSection">
-      <h2>Catálogo de Productos</h2>
-      <div id="alertBox"></div>
-      <div id="catalogo" class="grid"></div>
+    <section class="welcome-section">
+      <h1>Bienvenido a Game Store</h1>
+      <p>Inicia sesión o regístrate para continuar</p>
+    </section>
+
+    <div id="alertBox"></div>
+
+    <section class="auth-wrapper">
+      <article class="tabs-container">
+        <nav class="tabs-header">
+          <button class="tab-button active" data-tab="login">
+            🔐 Iniciar Sesión
+          </button>
+          <button class="tab-button" data-tab="registro">
+            ✨ Registrarse
+          </button>
+        </nav>
+
+        <section class="tabs-content">
+          <!-- TAB: INICIAR SESIÓN -->
+          <article class="tab-pane active" id="login">
+            <header class="form-header">
+              <h2>Iniciar Sesión</h2>
+              <p>Ingresa tus credenciales para acceder</p>
+            </header>
+            <form id="formLogin">
+              <label class="form-group">
+                📧 Correo Electrónico
+                <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+              </label>
+              <label class="form-group">
+                🔒 Contraseña
+                <input type="password" name="password" placeholder="••••••••" required autocomplete="current-password">
+              </label>
+              <button type="submit" class="submit-btn">Ingresar</button>
+              <p class="form-footer">
+                ¿No tienes cuenta? <strong data-switch="registro">Regístrate aquí</strong>
+              </p>
+            </form>
+          </article>
+
+          <!-- TAB: REGISTRO -->
+          <article class="tab-pane" id="registro">
+            <header class="form-header">
+              <h2>Crear Cuenta</h2>
+              <p>Completa tus datos para registrarte</p>
+            </header>
+            <form id="formRegistro">
+              <label class="form-group">
+                👤 Nombre Completo
+                <input type="text" name="nombre" placeholder="Juan Pérez" required autocomplete="name">
+              </label>
+              <label class="form-group">
+                📧 Correo Electrónico
+                <input type="email" name="email" placeholder="tu@email.com" required autocomplete="email">
+              </label>
+              <label class="form-group">
+                🔒 Contraseña
+                <input type="password" name="password" placeholder="••••••••" required autocomplete="new-password"
+                  minlength="6">
+              </label>
+              <button type="submit" class="submit-btn">Registrarse</button>
+              <p class="form-footer">
+                ¿Ya tienes cuenta? <strong data-switch="login">Inicia sesión aquí</strong>
+              </p>
+            </form>
+          </article>
+        </section>
+      </article>
     </section>
   </main>
 
@@ -27,6 +90,8 @@
     <p>© 2025 todos los derechos reservados</p>
   </footer>
 
+  <script src="./scripts/main.js"></script>
   <script src="./scripts/app.js"></script>
 </body>
+
 </html>
