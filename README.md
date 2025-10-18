@@ -1,61 +1,58 @@
-## README Frontend
+# Inventario Digital Gamer - Frontend
 
-# Frontend - Tienda de Videojuegos
+Este proyecto es la interfaz visual de una aplicación de inventario y ventas para una tienda de videojuegos. Está desarrollado con **HTML**, **CSS** y **JavaScript puro**, sin frameworks, lo que lo hace ideal para demostrar habilidades fundamentales en desarrollo web.
 
-Este es el frontend de la aplicación de inventario y ventas para una tienda de videojuegos. Está desarrollado con **HTML**, **CSS** y **JavaScript puro**, y se conecta con una API REST construida en Node.js.
+## ¿Qué hace esta app?
 
-## Funcionalidades
-
-- Listar catálogo de productos
-- Simular una compra (registrar venta)
-- Mostrar mensajes de error si no hay stock
-- Interfaz amigable para crear, editar y eliminar productos
-
-## Instalación
-
-1. Clona este repositorio:
-   ```bash
-   git clone https://github.com/tu-usuario/frontend-inventario.git
-   cd frontend-inventario
-
-2. Abre el archivo index.html en tu navegador o usa una extensión como Live Server en VS Code.
-
-    Asegúrate de que el backend esté corriendo y que el CORS esté correctamente configurado para permitir la conexión.
-
-## Conexión con el backend
-
-El frontend se comunica con el backend a través de fetch() usando la URL base definida en el archivo config.js o directamente en los scripts.
-
-Ejemplo:
-fetch('http://localhost:3000/api/productos')
+- Muestra productos disponibles en la tienda
+- Permite registrar ventas desde la interfaz
+- Actualiza el stock automáticamente tras cada venta
+- Se conecta con una API RESTful para manejar datos en tiempo real
 
 ## Estructura del proyecto
 
-frontend/
+```
+Inventario-Digital-Gamer/
 ├── index.html
-├── styles.css
-├── empleados.js
-├── usuarios.js
-└── app.js 
+├── style.css
+└── script.js
+```
 
-<<<<<<< HEAD
-### Productos
-- GET /api/productos → Listar todos los productos
+- `index.html`: Estructura principal de la interfaz
+- `style.css`: Estilos visuales personalizados
+- `script.js`: Lógica de conexión con el backend y manipulación del DOM
 
-- POST /api/productos → Crear un nuevo producto
+## Conexión con el backend
 
-- PUT /api/productos/:id → Actualizar un producto
+Este frontend se comunica con el backend mediante `fetch()` a rutas como:
 
-- DELETE /api/productos/:id → Eliminar un producto
+```javascript
+fetch('http://localhost:3000/api/productos')
+```
 
-### Ventas
-- POST /api/ventas → Registrar una venta (descuenta stock automáticamente)
+Asegúrate de que el backend esté corriendo localmente o en un servidor accesible.
 
-**Las rutas incluyen validaciones con express-validator y retornan errores claros si los datos son inválidos.**
+## Funcionalidades clave
 
-## Repositorio del frontend
-- aaa
-=======
-## Validaciones
-Los mensajes de error del backend (como stock insuficiente o datos inválidos) se muestran en la interfaz para mejorar la experiencia del usuario.
->>>>>>> 4e8f67f9d08f56806648248c25678ae4632744e5
+- Carga dinámica de productos desde la API
+- Validación básica de formularios
+- Registro de ventas con actualización visual del stock
+- Manejo de errores y respuestas del servidor
+
+## Requisitos para correr
+
+- Navegador moderno (Chrome, Firefox, Edge)
+- Backend corriendo en `localhost:3000` o URL configurada
+- Conexión a internet si se usa base de datos remota
+
+## Cómo usar
+
+1. Clona el repositorio:
+
+```bash
+git clone https://github.com/cristian20252025/Inventario-Digital-Gamer.git
+```
+
+2. Abre `index.html` en tu navegador
+
+3. Interactúa con la interfaz para ver productos y registrar ventas
