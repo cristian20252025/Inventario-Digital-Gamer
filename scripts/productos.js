@@ -1,10 +1,10 @@
 /**
- * 👨‍💼 PRODUCTOS.JS - Lógica del panel de empleados
+ * 💼 PRODUCTOS.JS - Lógica del panel de empleados
  * Gestión completa de productos: CRUD + búsqueda
  */
 
 // ========== CONFIGURACIÓN ==========
-const API_URL = 'http://localhost:3000/api'; // Ajusta según tu backend
+const API_URL = 'http://localhost:4000'; // Backend URL
 let productos = [];
 let productoEnEdicion = null;
 let empleadoActual = null;
@@ -19,29 +19,50 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Verifica que el usuario esté autenticado y sea empleado
  */
-function verificarSesion() {
+async function verificarSesion() {
   try {
-    const userData = sessionStorage.getItem('usuario');
-    if (!userData) {
-      alert('Debes iniciar sesión primero');
-      window.location.href = '../index.html';
+    console.log('🔍 Verificando sesión...');
+    
+    // Verificar sesión con el backend mediante cookies
+    const response = await fetch(`${API_URL}/usuarios/verificar-sesion`, {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    });
+    
+    console.log('📡 Respuesta de verificación:', response.status);
+
+    if (!response.ok) {
+      // No hay sesión activa
+      mostrarAlerta('⚠️ Debes iniciar sesión primero', 'error', 2000);
+      setTimeout(() => {
+        window.location.href = '../index.html';
+      }, 2000);
       return;
     }
-    
-    empleadoActual = JSON.parse(userData);
-    
+
+    const data = await response.json();
+    empleadoActual = data.usuario;
+
     // Verificar que sea un empleado
-    if (empleadoActual.tipo && empleadoActual.tipo.toLowerCase() !== 'empleado') {
-      alert('Acceso denegado. Esta sección es solo para empleados.');
-      window.location.href = '../index.html';
+    if (empleadoActual.tipo.toLowerCase() !== 'empleado') {
+      mostrarAlerta('🚫 Acceso denegado. Esta sección es solo para empleados.', 'error', 2000);
+      setTimeout(() => {
+        window.location.href = '../html/compra.html';
+      }, 2000);
       return;
     }
-    
+
     // Mostrar nombre del empleado
-    document.getElementById('nombreEmpleado').textContent = empleadoActual.usuario || empleadoActual.nombre;
+    document.getElementById('nombreEmpleado').textContent = empleadoActual.usuario;
   } catch (error) {
     console.error('Error al verificar sesión:', error);
-    window.location.href = '../index.html';
+    mostrarAlerta('❌ Error al verificar sesión', 'error', 2000);
+    setTimeout(() => {
+      window.location.href = '../index.html';
+    }, 2000);
   }
 }
 
@@ -59,9 +80,9 @@ function inicializarEventos() {
   document.getElementById('buscarProducto').addEventListener('input', buscarProductos);
   
   // Cerrar sesión
-  document.getElementById('btnCerrarSesion').addEventListener('click', (e) => {
+  document.getElementById('btnCerrarSesion').addEventListener('click', async (e) => {
     e.preventDefault();
-    cerrarSesion();
+    await cerrarSesion();
   });
 }
 
@@ -70,7 +91,10 @@ function inicializarEventos() {
  */
 async function cargarProductos() {
   try {
-    const response = await fetch(`${API_URL}/productos`);
+    const response = await fetch(`${API_URL}/productos`, {
+      method: 'GET',
+      credentials: 'include'
+    });
     
     if (!response.ok) {
       throw new Error('Error al cargar productos');
@@ -80,7 +104,7 @@ async function cargarProductos() {
     renderizarTabla(productos);
   } catch (error) {
     console.error('Error al cargar productos:', error);
-    mostrarAlerta('Error al cargar los productos', 'error');
+    mostrarAlerta('❌ Error al cargar los productos', 'error');
   }
 }
 
@@ -95,21 +119,26 @@ function renderizarTabla(productosArray) {
     return;
   }
   
-  tbody.innerHTML = productosArray.map(producto => `
-    <tr>
-      <td>${producto.nombre}</td>
-      <td>${producto.plataforma || 'N/A'}</td>
-      <td>${producto.genero || 'N/A'}</td>
-      <td><strong>$${Number(producto.precio).toLocaleString()}</strong></td>
-      <td>${generarBadgeStock(producto.stock)}</td>
-      <td>
-        <div class="acciones-cell">
-          <button class="btn-edit" onclick="editarProducto('${producto._id}')">✏️ Editar</button>
-          <button class="btn-delete" onclick="eliminarProducto('${producto._id}', '${producto.nombre}')">🗑️ Eliminar</button>
-        </div>
-      </td>
-    </tr>
-  `).join('');
+  tbody.innerHTML = productosArray.map(producto => {
+    // Usar el ID personalizado (id) no el _id de MongoDB
+    const productoId = producto.id || producto._id;
+    
+    return `
+      <tr>
+        <td>${producto.nombre}</td>
+        <td>${producto.plataforma || 'N/A'}</td>
+        <td>${producto.genero || 'N/A'}</td>
+        <td><strong>$${Number(producto.precio).toFixed(2)}</strong></td>
+        <td>${generarBadgeStock(producto.cantidad_disponible || producto.stock || 0)}</td>
+        <td>
+          <div class="acciones-cell">
+            <button class="btn-edit" onclick="editarProducto('${productoId}')">✏️ Editar</button>
+            <button class="btn-delete" onclick="eliminarProducto('${productoId}', '${producto.nombre}')">🗑️ Eliminar</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
 }
 
 /**
@@ -155,26 +184,31 @@ async function guardarProducto(e) {
   
   const producto = {
     nombre: formData.get('nombre'),
-    plataforma: formData.get('plataforma'),
-    genero: formData.get('genero'),
     precio: parseFloat(formData.get('precio')),
-    stock: parseInt(formData.get('stock')),
-    descripcion: formData.get('descripcion') || ''
+    cantidad_disponible: parseInt(formData.get('stock')),
+    descripcion: formData.get('descripcion') || '',
+    plataforma: formData.get('plataforma') || '',
+    genero: formData.get('genero') || ''
   };
   
+  // Si estamos creando un producto nuevo, generar ID personalizado
+  if (!productoEnEdicion) {
+    producto.id = `P${Date.now()}`;
+  }
+  
   // Validación
-  if (!producto.nombre || !producto.plataforma || !producto.genero) {
-    mostrarAlerta('Por favor completa todos los campos obligatorios', 'error');
+  if (!producto.nombre) {
+    mostrarAlerta('⚠️ El nombre del producto es obligatorio', 'error');
     return;
   }
   
   if (producto.precio <= 0) {
-    mostrarAlerta('El precio debe ser mayor a 0', 'error');
+    mostrarAlerta('⚠️ El precio debe ser mayor a 0', 'error');
     return;
   }
   
-  if (producto.stock < 0) {
-    mostrarAlerta('El stock no puede ser negativo', 'error');
+  if (producto.cantidad_disponible < 0) {
+    mostrarAlerta('⚠️ El stock no puede ser negativo', 'error');
     return;
   }
   
@@ -186,30 +220,36 @@ async function guardarProducto(e) {
     let response;
     
     if (productoEnEdicion) {
-      // Actualizar producto existente
-      response = await fetch(`${API_URL}/productos/${productoEnEdicion}`, {
-        method: 'PUT',
+      // Actualizar producto existente usando el ID personalizado
+      console.log('🔧 Actualizando producto:', productoEnEdicion);
+      response = await fetch(`${API_URL}/productos?id=${productoEnEdicion}`, {
+        method: 'PATCH',
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(producto)
       });
     } else {
       // Crear nuevo producto
+      console.log('➕ Creando producto:', producto);
       response = await fetch(`${API_URL}/productos`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         },
+        credentials: 'include',
         body: JSON.stringify(producto)
       });
     }
     
+    const data = await response.json();
+    
     if (!response.ok) {
-      throw new Error('Error al guardar el producto');
+      throw new Error(data.error || 'Error al guardar el producto');
     }
     
-    const mensaje = productoEnEdicion ? 'Producto actualizado con éxito' : 'Producto agregado con éxito';
+    const mensaje = productoEnEdicion ? '✅ Producto actualizado con éxito' : '✅ Producto agregado con éxito';
     mostrarAlerta(mensaje, 'success');
     
     // Limpiar y recargar
@@ -217,7 +257,7 @@ async function guardarProducto(e) {
     cargarProductos();
   } catch (error) {
     console.error('Error al guardar producto:', error);
-    mostrarAlerta('Error al guardar el producto. Intenta nuevamente.', 'error');
+    mostrarAlerta(`❌ ${error.message}`, 'error');
   } finally {
     btnGuardar.disabled = false;
     btnGuardar.textContent = '💾 Guardar Producto';
@@ -228,29 +268,33 @@ async function guardarProducto(e) {
  * Carga los datos de un producto en el formulario para editarlo
  */
 function editarProducto(id) {
-  const producto = productos.find(p => p._id === id);
+  console.log('✏️ Editando producto con ID:', id);
+  
+  // Buscar producto por id personalizado o _id
+  const producto = productos.find(p => p.id === id || p._id === id);
   
   if (!producto) {
-    mostrarAlerta('Producto no encontrado', 'error');
+    mostrarAlerta('❌ Producto no encontrado', 'error');
     return;
   }
   
-  // Cambiar el modo a edición
-  productoEnEdicion = id;
+  // Guardar el ID personalizado para edición
+  productoEnEdicion = producto.id || producto._id;
+  console.log('📝 Producto en edición:', productoEnEdicion);
   
   // Llenar el formulario
-  document.getElementById('productoId').value = id;
+  document.getElementById('productoId').value = productoEnEdicion;
   document.getElementById('nombre').value = producto.nombre;
   document.getElementById('plataforma').value = producto.plataforma || '';
   document.getElementById('genero').value = producto.genero || '';
   document.getElementById('precio').value = producto.precio;
-  document.getElementById('stock').value = producto.stock || 0;
+  document.getElementById('stock').value = producto.cantidad_disponible || producto.stock || 0;
   document.getElementById('descripcion').value = producto.descripcion || '';
   
   // Cambiar el título del formulario
   document.getElementById('formTitulo').textContent = '✏️ Editar Producto';
   document.getElementById('btnGuardar').textContent = '💾 Actualizar Producto';
-  document.getElementById('btnCancelar').classList.add('visible');
+  document.getElementById('btnCancelar').style.display = 'inline-block';
   
   // Scroll al formulario
   document.getElementById('formProducto').scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -269,7 +313,7 @@ function cancelarEdicion() {
   // Restaurar el título
   document.getElementById('formTitulo').textContent = '➕ Agregar Nuevo Producto';
   document.getElementById('btnGuardar').textContent = '💾 Guardar Producto';
-  document.getElementById('btnCancelar').classList.remove('visible');
+  document.getElementById('btnCancelar').style.display = 'none';
 }
 
 /**
@@ -281,29 +325,52 @@ async function eliminarProducto(id, nombre) {
   }
   
   try {
-    const response = await fetch(`${API_URL}/productos/${id}`, {
-      method: 'DELETE'
+    console.log('🗑️ Eliminando producto con ID:', id);
+    
+    const response = await fetch(`${API_URL}/productos?id=${id}`, {
+      method: 'DELETE',
+      credentials: 'include'
     });
     
+    const data = await response.json();
+    
     if (!response.ok) {
-      throw new Error('Error al eliminar el producto');
+      throw new Error(data.error || 'Error al eliminar el producto');
     }
     
-    mostrarAlerta('Producto eliminado con éxito', 'success');
+    mostrarAlerta('✅ Producto eliminado con éxito', 'success');
     cargarProductos();
   } catch (error) {
     console.error('Error al eliminar producto:', error);
-    mostrarAlerta('Error al eliminar el producto. Intenta nuevamente.', 'error');
+    mostrarAlerta(`❌ ${error.message}`, 'error');
   }
 }
 
 /**
  * Cierra la sesión del usuario
  */
-function cerrarSesion() {
-  if (confirm('¿Deseas cerrar sesión?')) {
-    sessionStorage.removeItem('usuario');
-    window.location.href = '../index.html';
+async function cerrarSesion() {
+  if (!confirm('¿Deseas cerrar sesión?')) {
+    return;
+  }
+  
+  try {
+    const response = await fetch(`${API_URL}/usuarios/logout`, {
+      method: 'POST',
+      credentials: 'include'
+    });
+    
+    if (response.ok) {
+      mostrarAlerta('✅ Sesión cerrada correctamente', 'success', 1500);
+      setTimeout(() => {
+        window.location.href = '../index.html';
+      }, 1500);
+    } else {
+      throw new Error('Error al cerrar sesión');
+    }
+  } catch (error) {
+    console.error('Error al cerrar sesión:', error);
+    mostrarAlerta('❌ Error al cerrar sesión', 'error');
   }
 }
 
@@ -327,3 +394,7 @@ function mostrarAlerta(mensaje, tipo = 'info', duracion = 4000) {
     setTimeout(() => alert.remove(), 300);
   }, duracion);
 }
+
+// Exponer funciones al scope global para los botones onclick
+window.editarProducto = editarProducto;
+window.eliminarProducto = eliminarProducto;
